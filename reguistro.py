@@ -39,12 +39,12 @@ def creacion():
 def registro_de_records():
      
  
-    records=open('registro_atletas.json','r')
-    
-   
+    file=open('registro_atletas.json','r')
+    records = json.load(file)
+  
     codigo = int(input('ingrese el codigo el atleta: '))
     for atleta in records:
-        if atleta == codigo:
+        if atleta['codigo_atleta'] == codigo:
           nombre_de_competencia = input('ingrese el nombre de la competencia: ')
           tiempo_reguistrado = input('indique el tiempo reguistrado: ')
           fecha = datetime.today().strftime("%Y-%m-%d %H:%m:%s")
@@ -65,8 +65,8 @@ def registro_de_records():
       file.close
     except Exception as error:
         records = []
-
+    print(records)
     records.append(atleta)
-    records = open('reguistro_de_los_records.json', 'w')
-    json.dump(atleta,records,indent=4)
-    records.close
+    file = open('reguistro_de_los_records.json', 'w')
+    json.dump(records,file,indent=4)
+    file.close()
